@@ -97,6 +97,9 @@ const Footer = () => {
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} RentProof. All rights reserved.
             </p>
+            <p className="text-sm text-muted-foreground">
+              Powered by Trusted Ideas
+            </p>
             <div className="flex items-center gap-4">
               <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
                 Facebook
