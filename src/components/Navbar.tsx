@@ -26,7 +26,7 @@ const Navbar = ({ isLoggedIn = false, userType, onLogout }: NavbarProps) => {
           {/* Logo */}
           <Link to="/">
             <div className="flex h-32 w-32 items-center justify-center">
-              <img src="Rentproof.png" alt="Rentproof icon" className=""/>
+              <img src="/Rentproof.png" alt="Rentproof logo" className=""/>
             </div>
           </Link>
 
