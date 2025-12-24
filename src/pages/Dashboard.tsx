@@ -62,6 +62,30 @@ const Dashboard = () => {
     });
   };
 
+  const lagosAreas = [
+  "Abule Egba", "Ajah", "Ajah", "Akoka", "Allen", "Amuwo Odofin",
+  "Apapa Wharf", "Bariga", "Bourdillon", "Coker", "Chevron",
+  "Ebute Metta", "Epe", "Festac Extension", "Festac Town",
+  "GRA Ikeja", "Ibeju", "Ibeshe", "Iganmu", "Ikate", "Ikorodu",
+  "Ikoyi", "Ikoyi-Ikate", "Ijede", "Ijede Road", "Idi-Araba",
+  "Ikeja GRA", "Iwaya", "Lagos Island", "Lagos Island East",
+  "Lagos Island West", "Lekki Conservation", "Lekki Phase 1",
+  "Lekki Phase 2", "Magodo", "Maryland", "Maroko", "Mile 2",
+  "Mushin", "Obalende", "Ojodu", "Ojuelegba", "Ojo", "Ogba",
+  "Orile Agege", "Sabo", "Satellite Town", "Shitta", "Shogunle",
+  "Tin Can Island", "VGC", "Victoria Island", "Victoria Island Extension",
+  "Yaba"
+];
+
+
+  const [image1, setImage1] = useState<File | null>(null)
+  const [image2, setImage2] = useState<File | null>(null)
+  const [image3, setImage3] = useState<File | null>(null)
+  const [image4, setImage4] = useState<File | null>(null)
+
+
+
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar isLoggedIn={true} userType="agent" />
@@ -85,6 +109,7 @@ const Dashboard = () => {
                 Add Property
               </Button>
             </DialogTrigger>
+            {/* add property */}
             <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
               <DialogHeader>
                 <DialogTitle>Add New Property</DialogTitle>
@@ -115,6 +140,8 @@ const Dashboard = () => {
                       </SelectContent>
                     </Select>
                   </div>
+
+                  {/* select area */}
                   <div className="space-y-2">
                     <Label>Area</Label>
                     <Select value={propertyData.area} onValueChange={(v) => setPropertyData({ ...propertyData, area: v })}>
@@ -122,12 +149,10 @@ const Dashboard = () => {
                         <SelectValue placeholder="Select area" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="Lekki">Lekki</SelectItem>
-                        <SelectItem value="Victoria Island">Victoria Island</SelectItem>
-                        <SelectItem value="Ikoyi">Ikoyi</SelectItem>
-                        <SelectItem value="Ikeja">Ikeja</SelectItem>
-                        <SelectItem value="Yaba">Yaba</SelectItem>
-                        <SelectItem value="Surulere">Surulere</SelectItem>
+                        {lagosAreas.map((area, idx)=>(
+                          <SelectItem value={area} key={idx}>{area}</SelectItem>
+                        ))}
+                        
                       </SelectContent>
                     </Select>
                   </div>
@@ -199,9 +224,37 @@ const Dashboard = () => {
                   />
                 </div>
 
+                 {/* add images */}
+                <div className="space-y-2">
+                  <Label>Upload images</Label>
+                  <div className='flex gap-2 flex-wrap justify-center'>
+                    
+                    <label htmlFor="image1">
+                      <img className='w-20' src={!image1 ? "/placeholder.svg" : URL.createObjectURL(image1)} alt="" />
+                      <input onChange={(e)=>setImage1(e.target.files[0])} type="file" id='image1' hidden />
+                    </label>
+
+                    <label htmlFor="image2">
+                      <img className='w-20' src={!image2 ? "/placeholder.svg" : URL.createObjectURL(image2)} alt="" />
+                      <input onChange={(e)=>setImage2(e.target.files[0])} type="file" id='image2' hidden />
+                    </label>
+              
+                    <label htmlFor="image3">
+                      <img className='w-20' src={!image3 ? "/placeholder.svg" : URL.createObjectURL(image3)} alt="" />
+                      <input onChange={(e)=>setImage3(e.target.files[0])} type="file" id='image3' hidden />
+                    </label>
+                  
+                    <label htmlFor="image4">
+                      <img className='w-20' src={!image4 ? "/placeholder.svg" : URL.createObjectURL(image4)} alt="" />
+                      <input onChange={(e)=>setImage4(e.target.files[0])} type="file" id='image4' hidden />
+                    </label>
+                  </div>
+                </div>
+
                 <div className="rounded-lg bg-muted p-3 text-sm text-muted-foreground">
                   <Clock className="mb-1 inline h-4 w-4" /> Your property will be reviewed and verified within 24-48 hours before appearing in listings.
                 </div>
+
 
                 <Button type="submit" className="w-full" size="lg">
                   Submit for Verification
